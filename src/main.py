@@ -1,13 +1,18 @@
 from fetcher.client import fetch_page
 from parser.html_parser import parse_html
+
 from checks.title_check import check_title
+from checks.meta_check import check_meta_description
 
 url = "https://example.com"
 
 html = fetch_page(url)
 soup = parse_html(html)
 
-issues = check_title(soup)
+issues = []
+
+issues.extend(check_title(soup))
+issues.extend(check_meta_description(soup))
 
 for issue in issues:
     print(f"[{issue.severity}] {issue.message}")
