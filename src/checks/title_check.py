@@ -25,7 +25,7 @@ def check_title(soup):
         )
 
     title_length = len(title_text)
-    if title_length < 10:
+    if title_length < 30:
         issues.append(
             Issue(
                 severity = "MEDIUM",
