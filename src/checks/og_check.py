@@ -12,7 +12,7 @@ def check_open_graph(soup):
     for tag in required_tags:
         og__tag = soup.find("meta", attrs={"property": tag})
 
-        if not og_tag:
+        if not og__tag:
             issues.append(
                 Issue(
                     severity = "MEDIUM",
