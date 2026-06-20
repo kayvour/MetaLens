@@ -10,6 +10,7 @@ from checks.alt_check import check_alt_text
 from checks.link_check import check_links
 
 from scoring.score_engine import calculate_score
+from reporting.json_report import generate_json_report
 
 url = "https://example.com"
 
@@ -27,6 +28,7 @@ issues.extend(check_alt_text(soup))
 issues.extend(check_links(soup))
 
 score = calculate_score(issues)
+generate_json_report(url, score, issues)
 
 print("\nMetaLens Audit Results")
 print("=" * 30)
@@ -39,3 +41,4 @@ else:
         print(f"[{issue.severity}] {issue.message}")
 
 print(f"\nTotal Issues Found: {len(issues)}")
+print("\nJSON report saved to reports/audit_report.json")
