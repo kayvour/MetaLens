@@ -8,6 +8,6 @@ def calculate_score(issues):
     }
 
     for issue in issues:
-        score -= penatlties.get(issue.severity, 0)
+        score -= penalties.get(issue.severity, 0)
 
     return max(score, 0)
