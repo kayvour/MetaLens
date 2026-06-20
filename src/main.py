@@ -12,7 +12,10 @@ from checks.link_check import check_links
 from scoring.score_engine import calculate_score
 from reporting.json_report import generate_json_report
 
-url = "https://example.com"
+url = input("Enter URL to audit: ").strip()
+
+if not url.startswith(("http://", "https://")):
+    url = "https://" + url
 
 html = fetch_page(url)
 soup = parse_html(html)
