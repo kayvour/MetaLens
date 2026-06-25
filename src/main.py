@@ -1,6 +1,8 @@
 from fetcher.client import fetch_page
 from parser.html_parser import parse_html
 
+from crawler.crawler import crawl_website
+
 from checks.title_check import check_title
 from checks.meta_check import check_meta_description
 from checks.h1_check import check_h1
@@ -23,6 +25,8 @@ if not url.startswith(("http://", "https://")):
 
 html = fetch_page(url)
 soup = parse_html(html)
+
+pages = crawl_website(soup, url)
 
 issues = []
 
@@ -50,6 +54,15 @@ else:
         print(f"[{issue.severity}] {issue.message}")
 
 print(f"\nTotal Issues Found: {len(issues)}")
+
+print("\nPages Discovered")
+print("=" * 30)
+
+if not pages:
+    print("No internal pages found.")
+else:
+    for page in pages:
+        print(page)
 
 print("\nJSON report saved to reports/audit_report.json")
 print("HTML report saved to reports/audit_report.html")
