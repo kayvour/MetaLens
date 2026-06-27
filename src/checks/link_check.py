@@ -26,7 +26,7 @@ def check_links(soup):
             Issue(
                 severity = "MEDIUM",
                 check = "Links",
-                message = f"{empty_href_count} empty href link(s)"
+                message = f"{missing_href_count} empty href link(s)"
             )
         )
         

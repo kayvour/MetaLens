@@ -1,3 +1,5 @@
+from models.issue import Issue
+
 def check_h1(soup):
     issues = []
 
@@ -9,7 +11,7 @@ def check_h1(soup):
             Issue(
                 severity = "HIGH",
                 check = "H1",
-                message = "Mising H1 tag"
+                message = "Missing H1 tag"
             )
         )
 
