@@ -1,7 +1,10 @@
+```python
 from fetcher.client import fetch_page
 from parser.html_parser import parse_html
 
 from crawler.crawler import crawl_website
+
+from models.page import Page
 
 from checks.title_check import check_title
 from checks.meta_check import check_meta_description
@@ -13,9 +16,6 @@ from checks.link_check import check_links
 
 from scoring.score_engine import calculate_score
 
-from reporting.json_report import generate_json_report
-from reporting.html_report import generate_html_report
-
 
 url = input("Enter URL to audit: ").strip()
 
@@ -23,46 +23,74 @@ if not url.startswith(("http://", "https://")):
     url = "https://" + url
 
 
-html = fetch_page(url)
-soup = parse_html(html)
+# Fetch homepage
+homepage_html = fetch_page(url)
+homepage_soup = parse_html(homepage_html)
 
-pages = crawl_website(soup, url)
+# Discover internal pages
+discovered_pages = crawl_website(homepage_soup, url)
 
-issues = []
+# Ensure homepage is included only once
+if url not in discovered_pages:
+    discovered_pages.insert(0, url)
 
-issues.extend(check_title(soup))
-issues.extend(check_meta_description(soup))
-issues.extend(check_h1(soup))
-issues.extend(check_canonical(soup))
-issues.extend(check_open_graph(soup))
-issues.extend(check_alt_text(soup))
-issues.extend(check_links(soup))
+pages = []
 
-score = calculate_score(issues)
+print(f"\nDiscovered {len(discovered_pages)} page(s).\n")
 
-generate_json_report(url, score, issues)
-generate_html_report(url, score, issues)
+for page_url in discovered_pages:
 
-print("\nMetaLens Audit Results")
-print("=" * 30)
-print(f"SEO Score: {score}/100\n")
+    try:
 
-if not issues:
-    print("No SEO issues found.")
-else:
-    for issue in issues:
-        print(f"[{issue.severity}] {issue.message}")
+        print(f"Auditing: {page_url}")
 
-print(f"\nTotal Issues Found: {len(issues)}")
+        page_html = fetch_page(page_url)
+        page_soup = parse_html(page_html)
 
-print("\nPages Discovered")
-print("=" * 30)
+        issues = []
 
-if not pages:
-    print("No internal pages found.")
-else:
-    for page in pages:
-        print(page)
+        issues.extend(check_title(page_soup))
+        issues.extend(check_meta_description(page_soup))
+        issues.extend(check_h1(page_soup))
+        issues.extend(check_canonical(page_soup))
+        issues.extend(check_open_graph(page_soup))
+        issues.extend(check_alt_text(page_soup))
+        issues.extend(check_links(page_soup))
 
-print("\nJSON report saved to reports/audit_report.json")
-print("HTML report saved to reports/audit_report.html")
+        score = calculate_score(issues)
+
+        pages.append(
+            Page(
+                url=page_url,
+                score=score,
+                issues=issues
+            )
+        )
+
+    except Exception as e:
+        print(f"Failed to audit {page_url}")
+        print(f"Reason: {e}")
+
+
+print("\n")
+print("=" * 60)
+print("MetaLens Audit Results")
+print("=" * 60)
+
+for page in pages:
+
+    print(f"\nURL: {page.url}")
+    print(f"SEO Score: {page.score}/100")
+
+    if not page.issues:
+        print("No SEO issues found.")
+    else:
+        for issue in page.issues:
+            print(f"[{issue.severity}] {issue.message}")
+
+    print(f"Total Issues Found: {len(page.issues)}")
+
+print("\n" + "=" * 60)
+print(f"Pages Audited: {len(pages)}")
+print("=" * 60)
+```
