@@ -1,135 +1,69 @@
 # MetaLens
 
-A Python-based SEO auditing tool that analyzes webpages and detects common on-page SEO issues. It helps developers, marketers, and website owners identify technical SEO problems before they impact search visibility.
+MetaLens is a simple Python tool for auditing websites and spotting common SEO issues before they become a problem.
 
-## Features
+![MetaLens landing page](frontend/assets/hero.svg)
 
-### ✅ Implemented Checks
+## What it does
 
-* **Title Tag Auditing**
-  * Missing title tags
-  * Empty title tags
-  * Title length validation
+MetaLens crawls a site, checks key on-page SEO elements, and gives you a score with a list of issues to fix. It can flag things like:
 
-* **Meta Description Auditing**
-  * Missing meta descriptions
-  * Empty meta descriptions
-  * Description length validation
+- missing or empty title tags
+- missing meta descriptions
+- missing H1 tags
+- missing canonical tags
+- missing Open Graph metadata
+- images without alt text
+- empty or placeholder links
 
-* **H1 Tag Auditing**
-  * Missing H1 tags
-  * Multiple H1 tags
+## Quick start
 
-* **Canonical Tag Auditing**
-  * Missing canonical tags
-  * Empty canonical URLs
+```bash
+git clone https://github.com/kayvour/MetaLens.git
+cd MetaLens
+pip install -r requirements.txt
+python src/main.py
+```
 
-* **Open Graph Validation**
-  * Validates OG meta tags for social sharing
+## Reports
 
-* **Image Alt Text Auditing**
-  * Detects missing alt attributes on images
-  * Validates alt text completeness
+MetaLens can generate:
 
-* **Internal Link Auditing**
-  * Analyzes internal link structure
-  * Detects broken or invalid links
+- console output for quick checks
+- JSON reports for automation
+- HTML reports for sharing and review
 
-* **Robots.txt Detection**
-  * Checks for robots.txt file presence
+![Sample MetaLens report](frontend/assets/screenshots/report.png)
 
-### ✅ Implemented Features
-
-* **Web Crawler**
-  * Multi-page crawling capabilities
-  * Internal link discovery
-  * URL normalization and management
-
-* **HTTP Client**
-  * Custom headers support
-  * Page fetching with error handling
-
-* **HTML Parser**
-  * BeautifulSoup-based HTML parsing
-  * Metadata and content extraction
-
-* **SEO Scoring Engine**
-  * Automated scoring based on issue severity
-  * Weighted penalty system (HIGH: 15pts, MEDIUM: 8pts, LOW: 3pts)
-
-* **Multiple Report Formats**
-  * JSON reports for data integration
-  * HTML reports for visual inspection
-  * Console output for quick feedback
-
-* **Audit Results & Models**
-  * Comprehensive data models for issues, pages, and audit results
-  * Structured issue tracking with severity levels
-
-## Project Structure
+## Project structure
 
 ```text
 src/
-├── checks/              # All SEO check implementations
-├── crawler/             # Website crawling logic
-├── fetcher/             # HTTP client and headers
-├── models/              # Data models (Issue, Page, AuditResult)
-├── parser/              # HTML parsing and extraction
-├── reporting/           # Report generation (JSON, HTML, Console)
-├── scoring/             # SEO score calculation
-└── utils/               # Constants, helpers, and logging
+├── checks/      # SEO checks for titles, meta tags, links, and more
+├── crawler/     # Website crawling logic
+├── fetcher/     # HTTP fetching layer
+├── models/      # Data models for issues and pages
+├── parser/      # HTML parsing utilities
+├── reporting/   # Report generation
+├── scoring/     # SEO score calculation
+└── utils/       # Shared helpers and constants
 ```
 
-## Example Output
+## Example output
 
 ```text
 [MEDIUM] Title is too short (14 characters)
 [HIGH] Missing meta description
 [HIGH] Missing canonical tag
-[MEDIUM] Image missing alt text: /images/header.png
-[LOW] Internal link unreachable: /discontinued-page
-```
-
-## Usage
-
-```bash
-# Run a single page audit
-python src/main.py
-
-# Or use the examples
-python examples/single_page_audit.py
-python examples/website_audit.py
+[MEDIUM] 3 images are missing alt text.
 ```
 
 ## Roadmap
 
-### ✅ Phase 1 - Completed
-
-* Title auditing
-* Meta description auditing
-* H1 auditing
-* Canonical auditing
-
-### ✅ Phase 2 - Completed
-
-* Open Graph validation
-* Image alt text auditing
-* Internal link auditing
-* Robots.txt detection
-
-### ✅ Phase 3 - Completed
-
-* Multi-page crawling
-* SEO scoring engine
-* JSON reports
-* HTML reports
-
-### Phase 4 - Upcoming
-
-* Website-wide audits with comparison
-* Crawl comparison and historical tracking
-* Interactive dashboard
-* Sitemap detection and validation
+- ✅ Core SEO checks
+- ✅ Multi-page crawling and scoring
+- ✅ HTML and JSON reporting
+- 🔜 A more polished dashboard and deeper comparisons
 
 ## License
 
