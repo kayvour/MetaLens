@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MetaLens</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="container">
+
+            <h1>MetaLens</h1>
+
+            <p class="subtitle">
+                A lightweight Python tool for auditing websites and identifying common SEO issues.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="https://github.com/kayvour/MetaLens" target="_blank">GitHub</a>
+                <a href="../README.md">Documentation</a>
+            </div>
+
+        </div>
+
+    </header>
+
+    <main class="container">
+
+        <section>
+
+            <h2>About</h2>
+
+            <p>
+                MetaLens crawls websites, detects technical SEO issues, calculates an SEO score,
+                and generates HTML and JSON reports for developers and website owners.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2>Features</h2>
+
+            <div class="features">
+
+                <div class="card">
+                    <h3>Website Crawling</h3>
+                    <p>Crawl multiple internal pages automatically.</p>
+                </div>
+
+                <div class="card">
+                    <h3>SEO Score</h3>
+                    <p>Generate an overall SEO score for every page.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Metadata Checks</h3>
+                    <p>Validate titles, descriptions, canonicals and H1 tags.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Open Graph</h3>
+                    <p>Detect missing Open Graph metadata.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Link Auditing</h3>
+                    <p>Identify missing, empty and placeholder links.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Reports</h3>
+                    <p>Generate HTML and JSON audit reports.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section>
+
+            <h2>Demo</h2>
+
+            <div class="demo-box">
+
+                <input
+                    id="url"
+                    type="text"
+                    placeholder="https://example.com"
+                >
+
+                <button id="audit-btn">
+                    Audit Website
+                </button>
+
+            </div>
+
+            <div id="loading" class="hidden">
+                Auditing website...
+            </div>
+
+            <div id="results" class="hidden">
+
+                <h3>Audit Summary</h3>
+
+                <div class="results-grid">
+
+                    <div class="result-card">
+                        <span>SEO Score</span>
+                        <strong id="score">82/100</strong>
+                    </div>
+
+                    <div class="result-card">
+                        <span>Pages Crawled</span>
+                        <strong id="pages">8</strong>
+                    </div>
+
+                    <div class="result-card">
+                        <span>Issues Found</span>
+                        <strong id="issues">14</strong>
+                    </div>
+
+                </div>
+
+                <h4>Sample Issues</h4>
+
+                <ul>
+
+                    <li>Missing canonical tag</li>
+
+                    <li>Missing Open Graph image</li>
+
+                    <li>Meta description too short</li>
+
+                    <li>6 images missing alt text</li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+        <section>
+
+            <h2>How It Works</h2>
+
+<pre>
+Website
+    │
+    ▼
+Crawler
+    │
+    ▼
+HTML Parser
+    │
+    ▼
+SEO Checks
+    │
+    ▼
+Score Engine
+    │
+    ▼
+Reports
+</pre>
+
+        </section>
+
+        <section>
+
+            <h2>Installation</h2>
+
+<pre>
+git clone https://github.com/kayvour/MetaLens.git
+
+cd MetaLens
+
+pip install -r requirements.txt
+
+python src/main.py
+</pre>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+            MetaLens • Built by Kaivalya Vaidya
+        </p>
+
+    </footer>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
