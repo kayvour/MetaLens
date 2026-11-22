@@ -1,6 +1,6 @@
 # MetaLens
 
-MetaLens is a simple Python tool for auditing websites and spotting common SEO issues before they become a problem.
+MetaLens is a very early Python prototype for auditing websites and spotting common SEO issues.
 
 ![MetaLens landing page](frontend/assets/hero.svg)
 
@@ -22,16 +22,22 @@ MetaLens crawls a site, checks key on-page SEO elements, and gives you a score w
 git clone https://github.com/kayvour/MetaLens.git
 cd MetaLens
 pip install -r requirements.txt
-python src/main.py
+python src/main.py example.com
+```
+
+To control crawling and report output:
+
+```bash
+python src/main.py https://example.com --max-pages 5 --output-dir reports
 ```
 
 ## Reports
 
-MetaLens can generate:
+MetaLens generates:
 
-- console output for quick checks
-- JSON reports for automation
-- HTML reports for sharing and review
+- console output
+- JSON report at `reports/audit_report.json`
+- HTML report at `reports/audit_report.html`
 
 ![Sample MetaLens report](frontend/assets/screenshots/report.png)
 
